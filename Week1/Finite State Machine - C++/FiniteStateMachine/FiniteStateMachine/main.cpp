@@ -17,6 +17,8 @@ enum class FSM_States
 	SitAndEat
 };
 
+void swapState(FSM_States* current_state, FSM_States new_state);
+
 int main()
 {
 	bool program_running = true;
@@ -40,18 +42,18 @@ int main()
 			case FSM_States::Watch:
 				std::cout << "Watching\n";
 
-				if(hungry)
-					currentState = FSM_States::FoodStall;
+				if (hungry)
+					swapState(&currentState, FSM_States::FoodStall);
 
 				if (homeTeamScores)
 				{
-					currentState = FSM_States::StandAndCheer;
+					swapState(&currentState, FSM_States::StandAndCheer);
 					homeTeamScores = false;
 					startTime = std::chrono::high_resolution_clock().now();
 				}
 				else if (enemyTeamScores)
 				{
-					currentState = FSM_States::StandAndBoo;
+					swapState(&currentState, FSM_States::StandAndBoo);
 					enemyTeamScores = false;
 					startTime = std::chrono::high_resolution_clock().now();
 				}
@@ -59,33 +61,33 @@ int main()
 		case FSM_States::StandAndBoo:
 			std::cout << "StandAndBoo\n";
 				if (hungry)
-					currentState = FSM_States::FoodStall;
+					swapState(&currentState, FSM_States::FoodStall);
 
 				if(std::chrono::high_resolution_clock().now() - startTime > std::chrono::seconds(5))
 				{
-					currentState = FSM_States::Watch;
+					swapState(&currentState, FSM_States::Watch);
 				}
 				break;
 			case FSM_States::StandAndCheer:
 				std::cout << "StandAndCheer\n";
 				if (hungry)
-					currentState = FSM_States::FoodStall;
+					swapState(&currentState, FSM_States::FoodStall);
 
 				if (std::chrono::high_resolution_clock().now() - startTime > std::chrono::seconds(5))
 				{
-					currentState = FSM_States::Watch;
+					swapState(&currentState, FSM_States::Watch);
 				}
 				break;
 			case FSM_States::FoodStall:
 				std::cout << "FoodStall\n";
 				if(gotFood)
-					currentState = FSM_States::SitAndEat;
+					swapState(&currentState, FSM_States::SitAndEat);
 				break;
 			case FSM_States::SitAndEat:
 				std::cout << "SitAndEat\n";
 				if (std::chrono::high_resolution_clock().now() - startTime > std::chrono::minutes(5))
 				{
-					currentState = FSM_States::Watch;
+					swapState(&currentState, FSM_States::Watch);
 				}
 				break;
 		}
@@ -133,4 +135,9 @@ int main()
 	std::cout << "Ending Finite State Machine" << std::endl;
 
 	return 0;
+}
+
+void swapState(FSM_States* current_state, FSM_States new_state)
+{
+	*current_state = new_state;
 }
