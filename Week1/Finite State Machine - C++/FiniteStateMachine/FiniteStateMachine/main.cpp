@@ -3,15 +3,14 @@
 #include <chrono>
 #include <conio.h>
 
-using namespace std;			// cout, endl
-using namespace this_thread;	// sleep_for
-using namespace chrono;			// seconds, milliseconds
+using namespace std::this_thread;	// sleep_for
+using namespace std::chrono;			// seconds, milliseconds
 
 int main()
 {
 	bool program_running = true;
 
-	cout << "Starting Finite State Machine. Press ESC key to close." << endl;
+	std::cout << "Starting Finite State Machine. Press ESC key to close." << std::endl;
 
 	do {
 
@@ -37,7 +36,7 @@ int main()
 
 	} while (program_running);
 
-	cout << "Ending Finite State Machine" << endl;
+	std::cout << "Ending Finite State Machine" << std::endl;
 
 	return 0;
 }
