@@ -1,5 +1,6 @@
-// SFML includes
+﻿// SFML includes
 #include <SFML/Graphics.hpp>
+#include <random>
 
 // The defines that state the size of the grid and the speed of the game.
 #define GRID_SIZE_X 50
@@ -8,7 +9,7 @@
 #define FRAMES_PER_SECOND 5
 #define MOVE_CHANCE 5
 
-// A GLOBAL!!! 
+// A GLOBAL!!!
 bool grid[GRID_SIZE_Y][GRID_SIZE_X] = { false };
 bool grid_changes[GRID_SIZE_Y][GRID_SIZE_X] = { false };
 
@@ -92,32 +93,140 @@ void grow()
 				number_of_neighbours++;
 			if (y < GRID_SIZE_Y - 1 && grid[y + 1][x])
 				number_of_neighbours++;
+			if (y > 0 && x > 0 && grid[y - 1][x - 1])
+				number_of_neighbours++;
+			if (y > 0 && x < GRID_SIZE_X - 1 && grid[y - 1][x + 1])
+				number_of_neighbours++;
+			if (x < GRID_SIZE_X - 1 && y < GRID_SIZE_Y - 1 && grid[y + 1][x + 1])
+				number_of_neighbours++;
+			if (y < GRID_SIZE_Y - 1 && x > 0 && grid[y + 1][x - 1])
+				number_of_neighbours++;
 
 			// If we have more than one neighbour
-			if (number_of_neighbours > 1)
+			//if (number_of_neighbours > 1)
+			//{
+			//    // If there is a node at the position, kill it
+			//    // If there is not a node at the position, spawn one
+			//    grid_changes[y][x] = grid[y][x] ? false : true;
+			//}
+
+			if (grid[y][x] == true)
 			{
-				// If there is a node at the position, kill it
-				// If there is not a node at the position, spawn one
-				grid_changes[y][x] = grid[y][x] ? false : true;
+				if (number_of_neighbours <= 1)
+				{
+					grid_changes[y][x] = false;
+				}
+				if (number_of_neighbours >= 4)
+				{
+					grid_changes[y][x] = false;
+				}
+				if (number_of_neighbours == 2 || number_of_neighbours == 3)
+				{
+					grid_changes[y][x] = true;
+				}
 			}
+			else
+			{
+				if (number_of_neighbours == 3)
+				{
+					grid_changes[y][x] = true;
+				}
+			}
+
 		}
 	}
 }
 
-void run_rules()
+void addRandomNote()
+{
+	int randomX = rand() % GRID_SIZE_X;
+	int randomY = rand() % GRID_SIZE_Y;
+
+	if (grid[randomX][randomY] == false)
+		grid_changes[randomX][randomY] = true;
+	else
+		addRandomNote();
+}
+
+std::vector<std::pair<int, int>> getPopluatedNoteCords()
+{
+	std::vector<std::pair<int, int>> populatedNoteCords;
+
+	for (int y = 0; y < GRID_SIZE_Y; y++)
+	{
+		for (int x = 0; x < GRID_SIZE_X; x++)
+		{
+			if (grid[x][y] == true)
+				populatedNoteCords.emplace_back(x, y);
+		}
+	}
+
+	return populatedNoteCords;
+}
+
+void killRandomNote()
+{
+	std::vector<std::pair<int, int>> populatedNoteCords = getPopluatedNoteCords();
+
+	int randomNote = rand() % populatedNoteCords.size();
+
+	grid_changes[populatedNoteCords.at(randomNote).first][populatedNoteCords.at(randomNote).second] = false;
+}
+
+std::random_device randomStuff;
+std::mt19937 gen{ (randomStuff()) };
+
+void checkOccupiedNodes()
+{
+	std::vector<std::pair<int, int>> populatedNoteCords = getPopluatedNoteCords();
+
+	int amountNotes = GRID_SIZE_X * GRID_SIZE_Y;
+
+	std::ranges::shuffle(populatedNoteCords, gen);
+
+	if(populatedNoteCords.size() > amountNotes * 3/4)
+	{
+		for (int note = 0; note < populatedNoteCords.size() / 2; note++)
+		{
+			grid_changes[populatedNoteCords.at(note).first][populatedNoteCords.at(note).second] = false;
+		}
+	}
+}
+
+void run_rules(int &cycles)
 {
 	// Run the rules
-	random_movement();
+	cycles++;
+	if(cycles % 5 == 0)
+	{
+		addRandomNote();
+	}
+	if(cycles % 6 == 0)
+	{
+		killRandomNote();
+	}
+
+	checkOccupiedNodes();
+
 	grow();
 }
 
 int main()
 {
+
+	//for (int y = 0; y < GRID_SIZE_Y; y++)
+	//{
+	//	for (int x = 0; x < GRID_SIZE_X; x++)
+	//	{
+	//		grid_changes[x][y] = true;
+	//	}
+	//}
+
 	// Seed the random number generator
 	srand((unsigned)std::time(NULL));
 
 	// Create the window and UI bar on the right
-	const sf::Vector2f gridSize(GRID_SIZE_X*SQUARE_SIZE, GRID_SIZE_Y*SQUARE_SIZE);
+	const sf::Vector2f gridSize(GRID_SIZE_X * SQUARE_SIZE, GRID_SIZE_Y * SQUARE_SIZE);
 	sf::RenderWindow window(sf::VideoMode((unsigned)(gridSize.x + 100.f), (unsigned)gridSize.y), "SFML_RuleBasedSystem", sf::Style::Close);
 	sf::RectangleShape shape(sf::Vector2f(100.f, gridSize.y));
 	shape.setPosition(sf::Vector2f(gridSize.x, 0.f));
@@ -139,7 +248,7 @@ int main()
 	text.setString("START");
 	text.setCharacterSize(48);
 	text.setRotation(90);
-	sf::Vector2f text_position(shape.getPosition().x + shape.getSize().x*0.75f, shape.getPosition().y + shape.getSize().y*0.35f);
+	sf::Vector2f text_position(shape.getPosition().x + shape.getSize().x * 0.75f, shape.getPosition().y + shape.getSize().y * 0.35f);
 	text.setPosition(text_position);
 
 	// Flag for when the game plays
@@ -148,6 +257,8 @@ int main()
 	// Clock for timing
 	sf::Clock clock;
 	float elapsed = 0.0f;
+
+	int cycles = 0;
 
 	// While the window is open, update
 	while (window.isOpen())
@@ -187,7 +298,7 @@ int main()
 			elapsed = 0.0f;
 			if (event_playing)
 			{
-				run_rules();
+				run_rules(cycles);
 			}
 		}
 
@@ -210,7 +321,7 @@ int main()
 				// Interestingly, we only draw inactive nodes (we have a texture for that)
 				if (!grid[y][x])
 				{
-					minibox.setPosition(sf::Vector2f((float)(x*SQUARE_SIZE), (float)(y*SQUARE_SIZE)));
+					minibox.setPosition(sf::Vector2f((float)(x * SQUARE_SIZE), (float)(y * SQUARE_SIZE)));
 					window.draw(minibox);
 				}
 			}
