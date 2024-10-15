@@ -1,0 +1,19 @@
+﻿  Source.cpp
+C:\Users\person\Desktop\AbertayOMG\CMP304\Week5\Genetic Algorithm - C++\GeneticAlgorithmC++\GeneticAlgorithm\Source.cpp(32,14): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\person\Desktop\AbertayOMG\CMP304\Week5\Genetic Algorithm - C++\GeneticAlgorithmC++\GeneticAlgorithm\Source.cpp(42,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\person\Desktop\AbertayOMG\CMP304\Week5\Genetic Algorithm - C++\GeneticAlgorithmC++\GeneticAlgorithm\Source.cpp(43,18): warning C4244: 'initializing': conversion from '_Ret' to 'int', possible loss of data
+C:\Users\person\Desktop\AbertayOMG\CMP304\Week5\Genetic Algorithm - C++\GeneticAlgorithmC++\GeneticAlgorithm\Source.cpp(43,18): warning C4244:         with
+C:\Users\person\Desktop\AbertayOMG\CMP304\Week5\Genetic Algorithm - C++\GeneticAlgorithmC++\GeneticAlgorithm\Source.cpp(43,18): warning C4244:         [
+C:\Users\person\Desktop\AbertayOMG\CMP304\Week5\Genetic Algorithm - C++\GeneticAlgorithmC++\GeneticAlgorithm\Source.cpp(43,18): warning C4244:             _Ret=double
+C:\Users\person\Desktop\AbertayOMG\CMP304\Week5\Genetic Algorithm - C++\GeneticAlgorithmC++\GeneticAlgorithm\Source.cpp(43,18): warning C4244:         ]
+C:\Users\person\Desktop\AbertayOMG\CMP304\Week5\Genetic Algorithm - C++\GeneticAlgorithmC++\GeneticAlgorithm\Source.cpp(44,21): warning C4244: 'initializing': conversion from '_Ret' to 'int', possible loss of data
+C:\Users\person\Desktop\AbertayOMG\CMP304\Week5\Genetic Algorithm - C++\GeneticAlgorithmC++\GeneticAlgorithm\Source.cpp(44,21): warning C4244:         with
+C:\Users\person\Desktop\AbertayOMG\CMP304\Week5\Genetic Algorithm - C++\GeneticAlgorithmC++\GeneticAlgorithm\Source.cpp(44,21): warning C4244:         [
+C:\Users\person\Desktop\AbertayOMG\CMP304\Week5\Genetic Algorithm - C++\GeneticAlgorithmC++\GeneticAlgorithm\Source.cpp(44,21): warning C4244:             _Ret=double
+C:\Users\person\Desktop\AbertayOMG\CMP304\Week5\Genetic Algorithm - C++\GeneticAlgorithmC++\GeneticAlgorithm\Source.cpp(44,21): warning C4244:         ]
+C:\Users\person\Desktop\AbertayOMG\CMP304\Week5\Genetic Algorithm - C++\GeneticAlgorithmC++\GeneticAlgorithm\Source.cpp(57,21): warning C4244: 'initializing': conversion from '_Ret' to 'float', possible loss of data
+C:\Users\person\Desktop\AbertayOMG\CMP304\Week5\Genetic Algorithm - C++\GeneticAlgorithmC++\GeneticAlgorithm\Source.cpp(57,21): warning C4244:         with
+C:\Users\person\Desktop\AbertayOMG\CMP304\Week5\Genetic Algorithm - C++\GeneticAlgorithmC++\GeneticAlgorithm\Source.cpp(57,21): warning C4244:         [
+C:\Users\person\Desktop\AbertayOMG\CMP304\Week5\Genetic Algorithm - C++\GeneticAlgorithmC++\GeneticAlgorithm\Source.cpp(57,21): warning C4244:             _Ret=double
+C:\Users\person\Desktop\AbertayOMG\CMP304\Week5\Genetic Algorithm - C++\GeneticAlgorithmC++\GeneticAlgorithm\Source.cpp(57,21): warning C4244:         ]
+  GeneticAlgorithm.vcxproj -> C:\Users\person\Desktop\AbertayOMG\CMP304\Week5\Genetic Algorithm - C++\GeneticAlgorithmC++\x64\Debug\GeneticAlgorithm.exe
