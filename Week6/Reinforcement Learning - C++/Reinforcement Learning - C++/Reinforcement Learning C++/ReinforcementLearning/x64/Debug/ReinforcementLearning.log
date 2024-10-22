@@ -1,0 +1,4 @@
+﻿  Source.cpp
+C:\Dev\Teaching\CMP304\24_25\Week 6\Reinforcement Learning - C++ (1)\Reinforcement Learning C++\ReinforcementLearning\Source.cpp(43,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Dev\Teaching\CMP304\24_25\Week 6\Reinforcement Learning - C++ (1)\Reinforcement Learning C++\ReinforcementLearning\Source.cpp(84,25): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  ReinforcementLearning.vcxproj -> C:\Dev\Teaching\CMP304\24_25\Week 6\Reinforcement Learning - C++ (1)\Reinforcement Learning C++\x64\Debug\ReinforcementLearning.exe

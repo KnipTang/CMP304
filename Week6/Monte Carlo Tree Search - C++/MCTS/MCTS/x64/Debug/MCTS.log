@@ -1,0 +1,3 @@
+﻿  TicTacToeNode.cpp
+C:\Dev\Teaching\CMP304\24_25\Week 6\MCTS\MCTS\TicTacToeNode.cpp(276,40): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  MCTS.vcxproj -> C:\Dev\Teaching\CMP304\24_25\Week 6\MCTS\x64\Debug\MCTS.exe
